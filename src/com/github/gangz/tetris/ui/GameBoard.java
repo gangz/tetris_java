@@ -9,7 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 
-public class GameBoard extends JFrame{
+import com.github.gangz.tetris.model.Block;
+import com.github.gangz.tetris.model.Game;
+import com.github.gangz.tetris.model.IGameDataChangedListener;
+
+public class GameBoard extends JFrame implements IGameDataChangedListener{
 	private static final int WINDOW_WIDTH = 600;
 	private static final int WINDOW_HEIGHT = 640;
 
@@ -17,12 +21,15 @@ public class GameBoard extends JFrame{
 	JPanel controlPanel;
 	CellPanel mainPanel ;
 	private DigitPanel scorePanel;
-	public GameBoard(){
+	private Game game;
+	public GameBoard(Game game){
 		initGameBoard();
 		createMainPanel();
 		createControlPanel();
 		createNextShapePanel();
 		createScoreCardPanel();
+		this.game = game;
+		game.registerDataChangedListener(this);
 	}
 	
 	private void createControlPanel() {
@@ -66,4 +73,10 @@ public class GameBoard extends JFrame{
 	}
 	public void start(){
 	}
+
+	@Override
+	public void dataChanged(Game game) {
+		mainPanel.drawBlock(game.getActiveBlock());
+	}
+
 }
