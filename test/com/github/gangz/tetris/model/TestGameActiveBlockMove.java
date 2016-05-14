@@ -19,7 +19,6 @@ public class TestGameActiveBlockMove {
 	private Game createGame() {
 		Game game = new Game();
 		game.start();
-		game.disableTimer();
 		return game;
 	}
 }

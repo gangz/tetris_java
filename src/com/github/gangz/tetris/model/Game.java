@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Game extends TimerTask{
+public class Game {
 	private Block activeBlock;
 	private Timer timer;
 	private List<IGameDataChangedListener> listeners;
@@ -13,8 +13,6 @@ public class Game extends TimerTask{
 	public Game(){
 		blockFactory = new BlockFactory();
 		listeners = new ArrayList<IGameDataChangedListener>();
-		timer = new Timer();
-		
 	}
 	public Block getActiveBlock() {
 		return activeBlock;
@@ -22,11 +20,8 @@ public class Game extends TimerTask{
 	public void registerDataChangedListener(IGameDataChangedListener listener) {
 		listeners.add(listener);
 	}
-	@Override
-	public void run() {
-		moveActiveBlockDown();
-	}
-	private void moveActiveBlockDown() {
+	
+	public void moveActiveBlockDown() {
 		activeBlock.moveDown();
 		notiveObservers();
 	}
@@ -38,25 +33,42 @@ public class Game extends TimerTask{
 	public void start() {
 		activeBlock = blockFactory.makeBar();
 		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
-		timer.schedule(this, 0,1000);
 	}
 
-	public void disableTimer() {
-		timer.cancel();
-	}
 	public void moveRight() {
 		activeBlock.moveRight();
+		notiveObservers();
 	}
 	public void rotateActiveBlock() {
 		
 	}
 	public void moveLeft() {
 		activeBlock.moveLeft();
+		notiveObservers();
 	}
 	public int getHorizonalSize() {
 		return 8;
 	}
 	public int getVerticalSize() {
 		return 16;
+	}
+	public void pauseToogle() {
+		if (this.isPaused())
+			this.resume();
+		else
+			this.pause();
+	}
+	boolean paused = true;
+	private void pause() {
+		paused = true;
+		timer.cancel();
+	}
+	private void resume() {
+		paused=false;
+		timer = new Timer();
+		timer.schedule(new BlockDownTask(this), 0,1000);
+	}
+	private boolean isPaused() {
+		return paused;
 	}
 }
