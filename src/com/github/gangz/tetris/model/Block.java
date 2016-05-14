@@ -40,4 +40,28 @@ public class Block {
 		this.x =x;
 		this.y = y;
 	}
+	public int getWidth() {
+		int mostLeft = Integer.MAX_VALUE;
+		int mostRight = -1;
+		for (Cell cell:getCells()){
+			int x = cell.getX();
+			if (x>mostRight)
+				mostRight=x;
+			if (x<mostLeft)
+				mostLeft = x;
+		}
+		return mostRight-mostLeft+1;
+	}
+	public int getHeight() {
+		int mostTop = Integer.MAX_VALUE;
+		int mostBottom = -1;
+		for (Cell cell:getCells()){
+			int x = cell.getY();
+			if (x>mostBottom)
+				mostBottom=x;
+			if (x<mostTop)
+				mostTop = x;
+		}
+		return mostBottom-mostTop+1;
+	}
 }

@@ -9,9 +9,12 @@ public class Game extends TimerTask{
 	private Block activeBlock;
 	private Timer timer;
 	private List<IGameDataChangedListener> listeners;
+	private BlockFactory blockFactory;
 	public Game(){
+		blockFactory = new BlockFactory();
 		listeners = new ArrayList<IGameDataChangedListener>();
 		timer = new Timer();
+		
 	}
 	public Block getActiveBlock() {
 		return activeBlock;
@@ -33,8 +36,8 @@ public class Game extends TimerTask{
 		}
 	}
 	public void start() {
-		activeBlock = BlockFactory.makeSingleCellBlock();
-		activeBlock.moveTo(getHorizonalSize()/2,0);
+		activeBlock = blockFactory.makeBar();
+		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
 		timer.schedule(this, 0,1000);
 	}
 
