@@ -25,12 +25,12 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	private DigitPanel scorePanel;
 	private Game game;
 	public GameBoard(Game game){
+		this.game = game;
 		initGameBoard();
 		createMainPanel();
 		createControlPanel();
 		createNextShapePanel();
 		createScoreCardPanel();
-		this.game = game;
 		game.registerDataChangedListener(this);
 		this.addKeyListener(this);
 	}
@@ -57,7 +57,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	}
 
 	private void createMainPanel() {
-		mainPanel = new CellPanel(8,16);
+		mainPanel = new CellPanel(game.getHorizonalSize(),game.getVerticalSize());
 		this.add(mainPanel);
 		mainPanel.setBounds(20, 20, mainPanel.getWidth(), mainPanel.getHeight());
 	}

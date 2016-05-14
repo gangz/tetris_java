@@ -40,9 +40,9 @@ public class CellPanel extends JComponent {
 		if (block==null) return;
 		List<Cell> cells = block.getCells();
 		for (Cell cell:cells){
-			g.fillRect((block.getX()+cell.getX())*CELL_PIXEL_SIZE,
+			g.fill3DRect((block.getX()+cell.getX())*CELL_PIXEL_SIZE,
 					(block.getY()+cell.getY())*CELL_PIXEL_SIZE,
-					CELL_PIXEL_SIZE, CELL_PIXEL_SIZE);
+					CELL_PIXEL_SIZE, CELL_PIXEL_SIZE,true);
 		}
 	}
 	

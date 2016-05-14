@@ -34,6 +34,7 @@ public class Game extends TimerTask{
 	}
 	public void start() {
 		activeBlock = BlockFactory.makeSingleCellBlock();
+		activeBlock.moveTo(getHorizonalSize()/2,0);
 		timer.schedule(this, 0,1000);
 	}
 
@@ -48,5 +49,11 @@ public class Game extends TimerTask{
 	}
 	public void moveLeft() {
 		activeBlock.moveLeft();
+	}
+	public int getHorizonalSize() {
+		return 8;
+	}
+	public int getVerticalSize() {
+		return 16;
 	}
 }
