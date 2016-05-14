@@ -30,4 +30,7 @@ public class Block {
 	public void moveDown() {
 		this.y++;
 	}
+	public void moveRight() {
+		this.x++;
+	}
 }

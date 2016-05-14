@@ -7,12 +7,11 @@ import java.util.TimerTask;
 
 public class Game extends TimerTask{
 	private Block activeBlock;
+	private Timer timer;
 	private List<IGameDataChangedListener> listeners;
 	public Game(){
-		activeBlock = BlockFactory.makeSingleCellBlock();
 		listeners = new ArrayList<IGameDataChangedListener>();
-		Timer timer = new Timer();
-		timer.schedule(this, 0,1000);
+		timer = new Timer();
 	}
 	public Block getActiveBlock() {
 		return activeBlock;
@@ -32,5 +31,16 @@ public class Game extends TimerTask{
 		for (IGameDataChangedListener listener:listeners){
 			listener.dataChanged(this);
 		}
+	}
+	public void start() {
+		activeBlock = BlockFactory.makeSingleCellBlock();
+		timer.schedule(this, 0,1000);
+	}
+
+	public void disableTimer() {
+		timer.cancel();
+	}
+	public void moveRight() {
+		activeBlock.moveRight();
 	}
 }
