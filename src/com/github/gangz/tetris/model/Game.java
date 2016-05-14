@@ -43,4 +43,10 @@ public class Game extends TimerTask{
 	public void moveRight() {
 		activeBlock.moveRight();
 	}
+	public void rotateActiveBlock() {
+		
+	}
+	public void moveLeft() {
+		activeBlock.moveLeft();
+	}
 }

@@ -3,6 +3,8 @@ package com.github.gangz.tetris.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +15,7 @@ import com.github.gangz.tetris.model.Block;
 import com.github.gangz.tetris.model.Game;
 import com.github.gangz.tetris.model.IGameDataChangedListener;
 
-public class GameBoard extends JFrame implements IGameDataChangedListener{
+public class GameBoard extends JFrame implements IGameDataChangedListener, KeyListener{
 	private static final int WINDOW_WIDTH = 600;
 	private static final int WINDOW_HEIGHT = 640;
 
@@ -30,6 +32,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener{
 		createScoreCardPanel();
 		this.game = game;
 		game.registerDataChangedListener(this);
+		this.addKeyListener(this);
 	}
 	
 	private void createControlPanel() {
@@ -77,6 +80,31 @@ public class GameBoard extends JFrame implements IGameDataChangedListener{
 	@Override
 	public void dataChanged(Game game) {
 		mainPanel.drawBlock(game.getActiveBlock());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode())
+		{
+		case KeyEvent.VK_LEFT:
+			game.moveLeft();
+			break;
+		case KeyEvent.VK_RIGHT:
+			game.moveRight();
+			break;
+		case KeyEvent.VK_UP:
+			game.rotateActiveBlock();
+			break;
+		}
+		mainPanel.repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 	}
 
 }
