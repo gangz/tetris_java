@@ -1,17 +1,14 @@
 package com.github.gangz.tetris.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 public class DigitPanel extends JPanel {
+	private static final long serialVersionUID = 2051376513052622569L;
 	JTextPane digitText;
 	public DigitPanel(int width, int height){
 		this.setBackground(Color.BLUE);

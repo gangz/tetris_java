@@ -6,16 +6,14 @@ import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 import com.github.gangz.tetris.model.Block;
 import com.github.gangz.tetris.model.Cell;
 
 public class CellPanel extends JComponent {
+	private static final long serialVersionUID = -1380132269794418871L;
 	private static final int CELL_PIXEL_SIZE = 35;
-	private int horizonalCellCount = 8;
-	private int verticalCellCount = 16;
 	private Block block;
 
 	
@@ -23,8 +21,6 @@ public class CellPanel extends JComponent {
 		this.setBackground(Color.BLACK);
 		this.setSize(new Dimension(horizonalCellCount*CELL_PIXEL_SIZE,
 				verticalCellCount*CELL_PIXEL_SIZE));
-		this.horizonalCellCount = horizonalCellCount;
-		this.verticalCellCount = verticalCellCount;
 		setBorder(new EtchedBorder());
 	}
 

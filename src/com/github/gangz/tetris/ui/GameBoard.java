@@ -2,20 +2,16 @@ package com.github.gangz.tetris.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.EtchedBorder;
-
-import com.github.gangz.tetris.model.Block;
 import com.github.gangz.tetris.model.Game;
 import com.github.gangz.tetris.model.IGameDataChangedListener;
 
 public class GameBoard extends JFrame implements IGameDataChangedListener, KeyListener{
+	private static final long serialVersionUID = 2849676876521085018L;
 	private static final int WINDOW_WIDTH = 600;
 	private static final int WINDOW_HEIGHT = 640;
 
@@ -47,7 +43,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	 * Init the game main board
 	 */
 	private void initGameBoard() {
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		this.setTitle("Tetris");
 		this.setBackground(Color.GREEN);
@@ -73,8 +69,6 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 		scorePanel = new DigitPanel(nextShapePanel.getWidth(),60);
 		controlPanel.add(scorePanel);
 		scorePanel.setLocation(0 ,nextShapePanel.getY()+nextShapePanel.getHeight()+30);
-	}
-	public void start(){
 	}
 
 	@Override
