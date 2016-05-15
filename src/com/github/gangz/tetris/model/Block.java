@@ -81,13 +81,23 @@ public class Block {
         ArrayList<Cell> newCellList = new ArrayList<Cell>();
         for (Cell cell:getCells()){
         	Integer y = cell.getY();
-        	if (!rowsToBeRemoved.contains(y))
-        		newCellList.add(cell);
+        	if (!rowsToBeRemoved.contains(y)){
+        		int compressRowCount = findHighRows(rowsToBeRemoved,y);
+        		newCellList.add(new Cell(cell.getX(),cell.getY()+compressRowCount));
+        	}
         }
         setCells(newCellList);
         return rowsToBeRemoved.size();
 	}
 	
+	private int findHighRows(List<Integer> rowsToBeRemoved, Integer thisRow) {
+		int count = 0;
+		for (Integer row:rowsToBeRemoved){
+			if (row>thisRow)
+				count++;
+		}
+		return count;
+	}
 	private List<Integer> findAllWhoeRows(int wholeRowWidth) {
 		ArrayList<Integer> wholeRowYIndex = new ArrayList<Integer>();
 		HashMap<Integer,Integer> rowCounts = new HashMap<Integer,Integer>();
