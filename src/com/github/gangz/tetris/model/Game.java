@@ -16,6 +16,7 @@ public class Game {
 	private Block bottomVirtualWall;
 	private Block leftVirtualWall;
 	private Block rightVirtualWall;
+	private Block piledBlock;
 	
 	public Game(){
 		blockFactory = new BlockFactory();
@@ -37,17 +38,20 @@ public class Game {
 	
 	public void moveActiveBlockDown() {
 		
-		if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall))
+		if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall) &&
+			!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock))
 			activeBlock.moveDown();
-		else
+		else{
+			piledBlock.join(activeBlock);
 			produceNewActiveBlock();
+		}
 		notifyObservers();
 	}
 	private void produceNewActiveBlock() {
 		activeBlock = nextBlock;
 		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
-		nextBlock = blockFactory.makeVerticalBar();
-		nextBlock.moveTo((4-nextBlock.getWidth())/2, (4-nextBlock.getHeight())/2);
+		nextBlock = blockFactory.makeRandomBlock();
+		nextBlock.moveTo((5-nextBlock.getWidth())/2, (5-nextBlock.getHeight())/2);
 	}
 	private void notifyObservers() {
 		for (IGameDataChangedListener listener:listeners){
@@ -55,8 +59,10 @@ public class Game {
 		}
 	}
 	public void start() {
-		nextBlock = blockFactory.makeVerticalBar();
+		nextBlock = blockFactory.makeRandomBlock();
 		produceNewActiveBlock();
+		piledBlock = blockFactory.makeEmptyBlock();
+		piledBlock.moveTo(0, 0);
 	}
 
 	public void moveRight() {
@@ -100,5 +106,8 @@ public class Game {
 	}
 	public Block getNextBlock() {
 		return nextBlock;
+	}
+	public Block getPiledBlock() {
+		return piledBlock;
 	}
 }

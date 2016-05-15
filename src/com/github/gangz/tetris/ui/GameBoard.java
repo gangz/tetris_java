@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import com.github.gangz.tetris.model.Block;
 import com.github.gangz.tetris.model.Game;
 import com.github.gangz.tetris.model.IGameDataChangedListener;
 
@@ -59,7 +63,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	}
 	
 	private void createNextShapePanel() {
-		nextShapePanel = new CellPanel(4,4);
+		nextShapePanel = new CellPanel(5,5);
 		controlPanel.add(nextShapePanel);
 		nextShapePanel.setLocation(0,0);
 	}
@@ -72,8 +76,13 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	}
 
 	public void dataChanged(Game game) {
-		mainPanel.drawBlock(game.getActiveBlock());
-		nextShapePanel.drawBlock(game.getNextBlock());
+		List<Block> blocks =  new ArrayList<Block>();
+		blocks.add(game.getActiveBlock());
+		blocks.add(game.getPiledBlock());
+		mainPanel.drawBlock(blocks);
+		List<Block> nextBlocks =  new ArrayList<Block>();
+		nextBlocks.add(game.getNextBlock());
+		nextShapePanel.drawBlock(nextBlocks);
 	}
 
 	public void keyPressed(KeyEvent e) {

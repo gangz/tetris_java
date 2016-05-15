@@ -67,4 +67,12 @@ public class Block {
 	public void rotate() {
 		
 	}
+	public void join(Block anotherBlock) {
+		int xOffset =anotherBlock.getX()-x;
+		int yOffset = anotherBlock.getY()-y;
+		for (Cell cell:anotherBlock.getCells()){
+			this.cells.add(new Cell(xOffset+cell.getX(),
+					                yOffset+cell.getY()));
+		}
+	}
 }

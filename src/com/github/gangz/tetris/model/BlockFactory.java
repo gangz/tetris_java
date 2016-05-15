@@ -38,11 +38,17 @@ public class BlockFactory {
 		return block;
 	}
 
+	public Block makeEmptyBlock(){
+		return new Block();
+	}
 	public Block makeVerticalBar() {
 		return getBlock(0);
 	}
 
-
+	public Block makeRandomBlock(){
+		int index = (int) (Math.random()*28);
+		return getBlock(index);
+	}
 	public Block getBlock(int index) {
 		Block block = new PredefinedBlock(index, this);
 		int[][] data = shape_data[index];
