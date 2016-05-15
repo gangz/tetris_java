@@ -57,11 +57,11 @@ public class Block {
 		int mostTop = Integer.MAX_VALUE;
 		int mostBottom = -1;
 		for (Cell cell:getCells()){
-			int x = cell.getY();
-			if (x>mostBottom)
-				mostBottom=x;
-			if (x<mostTop)
-				mostTop = x;
+			int y = cell.getY();
+			if (y>mostBottom)
+				mostBottom=y;
+			if (y<mostTop)
+				mostTop = y;
 		}
 		return mostBottom-mostTop+1;
 	}

@@ -46,6 +46,9 @@ public class Game {
 			}
 			else{
 				piledBlock.join(activeBlock);
+				System.out.println("H:" + piledBlock.getHeight());
+				if (piledBlock.getHeight()>=getVerticalSize()) //restart game
+					start();
 				produceNewActiveBlock();
 			}
 			notifyObservers();
