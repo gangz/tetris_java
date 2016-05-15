@@ -52,4 +52,18 @@ public class BlockFactory {
 		block.addCell(new Cell(data[3][0],data[3][1]));
 		return block;
 	}
+
+	public Block makeHorzionalBar(int size) {
+		Block block = new Block();
+		for (int x=0;x<size;x++)
+			block.addCell(new Cell(x,0));
+		return block;
+	}
+	
+	public Block makeVerticalBar(int size) {
+		Block block = new Block();
+		for (int y=0;y<size;y++)
+			block.addCell(new Cell(0,y));
+		return block;
+	}
 }

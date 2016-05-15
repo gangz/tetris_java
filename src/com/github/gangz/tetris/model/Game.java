@@ -4,14 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import com.github.gangz.tetris.model.BlockCollsionDetector.Direction;
+
 public class Game {
 	private Block activeBlock;
 	private Timer timer;
 	private List<IGameDataChangedListener> listeners;
 	private BlockFactory blockFactory;
+	private BlockCollsionDetector collsionDetector;
+	private Block bottomVirtualWall;
+	private Block leftVirtualWall;
+	private Block rightVirtualWall;
+	
 	public Game(){
 		blockFactory = new BlockFactory();
+		collsionDetector = new BlockCollsionDetector();
 		listeners = new ArrayList<IGameDataChangedListener>();
+		bottomVirtualWall = blockFactory.makeHorzionalBar(getHorizonalSize());
+		bottomVirtualWall.moveTo(0, getVerticalSize());
+		leftVirtualWall = blockFactory.makeVerticalBar(getVerticalSize());
+		leftVirtualWall.moveTo(-1, 0);
+		rightVirtualWall = blockFactory.makeVerticalBar(getVerticalSize());
+		rightVirtualWall.moveTo(getHorizonalSize(),0);
 	}
 	public Block getActiveBlock() {
 		return activeBlock;
@@ -21,7 +35,9 @@ public class Game {
 	}
 	
 	public void moveActiveBlockDown() {
-		activeBlock.moveDown();
+		
+		if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall))
+			activeBlock.moveDown();
 		notifyObservers();
 	}
 	private void notifyObservers() {
@@ -35,7 +51,8 @@ public class Game {
 	}
 
 	public void moveRight() {
-		activeBlock.moveRight();
+		if (!collsionDetector.detect(activeBlock, Direction.RIGHT, rightVirtualWall))
+			activeBlock.moveRight();
 		notifyObservers();
 	}
 	public void rotateActiveBlock() {
@@ -43,7 +60,8 @@ public class Game {
 		notifyObservers();
 	}
 	public void moveLeft() {
-		activeBlock.moveLeft();
+		if (!collsionDetector.detect(activeBlock, Direction.LEFT, leftVirtualWall))
+			activeBlock.moveLeft();
 		notifyObservers();
 	}
 	public int getHorizonalSize() {

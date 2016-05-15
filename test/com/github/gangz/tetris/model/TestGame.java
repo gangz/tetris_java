@@ -13,5 +13,4 @@ public class TestGame {
 		assertNotNull(game.getActiveBlock());
 	}
 
-
 }
