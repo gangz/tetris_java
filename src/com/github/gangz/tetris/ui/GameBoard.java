@@ -73,6 +73,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 
 	public void dataChanged(Game game) {
 		mainPanel.drawBlock(game.getActiveBlock());
+		nextShapePanel.drawBlock(game.getNextBlock());
 	}
 
 	public void keyPressed(KeyEvent e) {

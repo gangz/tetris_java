@@ -8,6 +8,7 @@ import com.github.gangz.tetris.model.BlockCollsionDetector.Direction;
 
 public class Game {
 	private Block activeBlock;
+	private Block nextBlock;
 	private Timer timer;
 	private List<IGameDataChangedListener> listeners;
 	private BlockFactory blockFactory;
@@ -43,8 +44,10 @@ public class Game {
 		notifyObservers();
 	}
 	private void produceNewActiveBlock() {
-		activeBlock = blockFactory.makeVerticalBar();
+		activeBlock = nextBlock;
 		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
+		nextBlock = blockFactory.makeVerticalBar();
+		nextBlock.moveTo((4-nextBlock.getWidth())/2, (4-nextBlock.getHeight())/2);
 	}
 	private void notifyObservers() {
 		for (IGameDataChangedListener listener:listeners){
@@ -52,6 +55,7 @@ public class Game {
 		}
 	}
 	public void start() {
+		nextBlock = blockFactory.makeVerticalBar();
 		produceNewActiveBlock();
 	}
 
@@ -93,5 +97,8 @@ public class Game {
 	}
 	private boolean isPaused() {
 		return paused;
+	}
+	public Block getNextBlock() {
+		return nextBlock;
 	}
 }

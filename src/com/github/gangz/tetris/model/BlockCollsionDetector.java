@@ -11,7 +11,6 @@ public class BlockCollsionDetector {
 		DOWN,
 		LEFT
 	}
-
 	
 	public boolean detect(Block block_1, Direction direction, Block block_2) {
 		ArrayList<Cell> block_2_actual_cell = new ArrayList<Cell>();
