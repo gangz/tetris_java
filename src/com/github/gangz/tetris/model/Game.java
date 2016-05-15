@@ -38,7 +38,13 @@ public class Game {
 		
 		if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall))
 			activeBlock.moveDown();
+		else
+			produceNewActiveBlock();
 		notifyObservers();
+	}
+	private void produceNewActiveBlock() {
+		activeBlock = blockFactory.makeVerticalBar();
+		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
 	}
 	private void notifyObservers() {
 		for (IGameDataChangedListener listener:listeners){
@@ -46,8 +52,7 @@ public class Game {
 		}
 	}
 	public void start() {
-		activeBlock = blockFactory.makeVerticalBar();
-		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
+		produceNewActiveBlock();
 	}
 
 	public void moveRight() {

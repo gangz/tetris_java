@@ -26,7 +26,12 @@ public class TestGameMoveBlock {
 	
 	@Test
 	public void move_down_should_produce_new_activeBlock(){
-		
+		Game game = new Game();
+		game.start();
+		Block oldActiveBlock = game.getActiveBlock();
+		for (int i=0;i<game.getVerticalSize();i++)
+			game.moveActiveBlockDown();
+		assertNotEquals(oldActiveBlock,game.getActiveBlock());
 	}
 
 }
