@@ -76,11 +76,11 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 	}
 
 	public void dataChanged(Game game) {
-		List<Block> blocks =  new ArrayList<Block>();
+		ArrayList<Block> blocks =  new ArrayList<Block>();
 		blocks.add(game.getActiveBlock());
 		blocks.add(game.getPiledBlock());
 		mainPanel.drawBlock(blocks);
-		List<Block> nextBlocks =  new ArrayList<Block>();
+		ArrayList<Block> nextBlocks =  new ArrayList<Block>();
 		nextBlocks.add(game.getNextBlock());
 		nextShapePanel.drawBlock(nextBlocks);
 	}

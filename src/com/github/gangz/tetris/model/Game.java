@@ -37,15 +37,16 @@ public class Game {
 	}
 	
 	public void moveActiveBlockDown() {
-		
-		if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall) &&
-			!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock))
-			activeBlock.moveDown();
-		else{
-			piledBlock.join(activeBlock);
-			produceNewActiveBlock();
+		synchronized(this){
+			if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall) &&
+				!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock))
+				activeBlock.moveDown();
+			else{
+				piledBlock.join(activeBlock);
+				produceNewActiveBlock();
+			}
+			notifyObservers();
 		}
-		notifyObservers();
 	}
 	private void produceNewActiveBlock() {
 		activeBlock = nextBlock;
