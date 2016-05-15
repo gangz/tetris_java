@@ -39,8 +39,13 @@ public class BlockFactory {
 	}
 
 	public Block makeBar() {
-		Block block = new Block();
-		int[][] data = shape_data[0];
+		return getBlock(12);
+	}
+
+
+	public Block getBlock(int index) {
+		Block block = new PredefinedBlock(index, this);
+		int[][] data = shape_data[index];
 		block.addCell(new Cell(data[0][0],data[0][1]));
 		block.addCell(new Cell(data[1][0],data[1][1]));
 		block.addCell(new Cell(data[2][0],data[2][1]));

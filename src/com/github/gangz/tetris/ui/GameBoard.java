@@ -93,6 +93,8 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 		case KeyEvent.VK_UP:
 			game.rotateActiveBlock();
 			break;
+		case KeyEvent.VK_DOWN:
+			game.moveActiveBlockDown();
 		case KeyEvent.VK_ENTER:
 			game.pauseToogle();
 		}

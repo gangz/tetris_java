@@ -22,9 +22,9 @@ public class Game {
 	
 	public void moveActiveBlockDown() {
 		activeBlock.moveDown();
-		notiveObservers();
+		notifyObservers();
 	}
-	private void notiveObservers() {
+	private void notifyObservers() {
 		for (IGameDataChangedListener listener:listeners){
 			listener.dataChanged(this);
 		}
@@ -36,14 +36,15 @@ public class Game {
 
 	public void moveRight() {
 		activeBlock.moveRight();
-		notiveObservers();
+		notifyObservers();
 	}
 	public void rotateActiveBlock() {
-		
+		activeBlock.rotate();
+		notifyObservers();
 	}
 	public void moveLeft() {
 		activeBlock.moveLeft();
-		notiveObservers();
+		notifyObservers();
 	}
 	public int getHorizonalSize() {
 		return 8;

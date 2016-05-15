@@ -64,4 +64,7 @@ public class Block {
 		}
 		return mostBottom-mostTop+1;
 	}
+	public void rotate() {
+		
+	}
 }
