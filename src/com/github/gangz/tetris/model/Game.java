@@ -38,6 +38,7 @@ public class Game {
 	
 	public void moveActiveBlockDown() {
 		synchronized(this){
+			if (isPaused()) resume();
 			if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall) &&
 				!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock)){
 				activeBlock.moveDown();
@@ -69,6 +70,7 @@ public class Game {
 	}
 
 	public void moveRight() {
+		if (isPaused()) resume();
 		if (!collsionDetector.detect(activeBlock, Direction.RIGHT, rightVirtualWall) &&
 				!collsionDetector.detect(activeBlock, Direction.RIGHT, piledBlock)){
 			activeBlock.moveRight();
@@ -80,6 +82,7 @@ public class Game {
 		notifyObservers();
 	}
 	public void moveLeft() {
+		if (isPaused()) resume();
 		if (!collsionDetector.detect(activeBlock, Direction.LEFT, leftVirtualWall) &&
 				!collsionDetector.detect(activeBlock, Direction.LEFT, piledBlock)){
 			activeBlock.moveLeft();
