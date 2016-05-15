@@ -39,8 +39,10 @@ public class Game {
 	public void moveActiveBlockDown() {
 		synchronized(this){
 			if (!collsionDetector.detect(activeBlock, Direction.DOWN, bottomVirtualWall) &&
-				!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock))
+				!collsionDetector.detect(activeBlock, Direction.DOWN, piledBlock)){
 				activeBlock.moveDown();
+				piledBlock.eliminate(getHorizonalSize());
+			}
 			else{
 				piledBlock.join(activeBlock);
 				produceNewActiveBlock();
@@ -67,18 +69,22 @@ public class Game {
 	}
 
 	public void moveRight() {
-		if (!collsionDetector.detect(activeBlock, Direction.RIGHT, rightVirtualWall))
+		if (!collsionDetector.detect(activeBlock, Direction.RIGHT, rightVirtualWall) &&
+				!collsionDetector.detect(activeBlock, Direction.RIGHT, piledBlock)){
 			activeBlock.moveRight();
-		notifyObservers();
+			notifyObservers();
+		}
 	}
 	public void rotateActiveBlock() {
 		activeBlock.rotate();
 		notifyObservers();
 	}
 	public void moveLeft() {
-		if (!collsionDetector.detect(activeBlock, Direction.LEFT, leftVirtualWall))
+		if (!collsionDetector.detect(activeBlock, Direction.LEFT, leftVirtualWall) &&
+				!collsionDetector.detect(activeBlock, Direction.LEFT, piledBlock)){
 			activeBlock.moveLeft();
-		notifyObservers();
+			notifyObservers();
+		}
 	}
 	public int getHorizonalSize() {
 		return 8;

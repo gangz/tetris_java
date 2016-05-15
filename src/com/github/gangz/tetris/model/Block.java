@@ -1,6 +1,7 @@
 package com.github.gangz.tetris.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Block {
@@ -75,4 +76,39 @@ public class Block {
 					                yOffset+cell.getY()));
 		}
 	}
+	public int eliminate(int wholeRowWidth) {
+		List<Integer> rowsToBeRemoved = findAllWhoeRows(wholeRowWidth);
+        ArrayList<Cell> newCellList = new ArrayList<Cell>();
+        for (Cell cell:getCells()){
+        	Integer y = cell.getY();
+        	if (!rowsToBeRemoved.contains(y))
+        		newCellList.add(cell);
+        }
+        setCells(newCellList);
+        return rowsToBeRemoved.size();
+	}
+	
+	private List<Integer> findAllWhoeRows(int wholeRowWidth) {
+		ArrayList<Integer> wholeRowYIndex = new ArrayList<Integer>();
+		HashMap<Integer,Integer> rowCounts = new HashMap<Integer,Integer>();
+        countAllRows(rowCounts);
+		for (Integer row:rowCounts.keySet()){
+        	if (rowCounts.get(row)==wholeRowWidth){
+        		wholeRowYIndex.add(row);
+        	}
+		}
+		return wholeRowYIndex;
+	}
+	private void countAllRows(HashMap<Integer,Integer> rowCounts) {
+		for (Cell cell:getCells()) {
+		    int y = cell.getY();
+	        Integer count = rowCounts.get(y);
+	        if (count==null)
+	        	count = new Integer(0);
+	        count++;
+	        rowCounts.put(y, count);
+	    }
+		
+	}
+
 }
