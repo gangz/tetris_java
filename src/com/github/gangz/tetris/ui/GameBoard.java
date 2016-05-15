@@ -71,16 +71,10 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 		scorePanel.setLocation(0 ,nextShapePanel.getY()+nextShapePanel.getHeight()+30);
 	}
 
-	@Override
 	public void dataChanged(Game game) {
 		mainPanel.drawBlock(game.getActiveBlock());
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-	}
-
-	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode())
 		{
@@ -100,8 +94,10 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
 	}
 
 }

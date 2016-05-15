@@ -38,8 +38,8 @@ public class BlockFactory {
 		return block;
 	}
 
-	public Block makeBar() {
-		return getBlock(12);
+	public Block makeVerticalBar() {
+		return getBlock(0);
 	}
 
 

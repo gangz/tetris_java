@@ -30,7 +30,7 @@ public class Game {
 		}
 	}
 	public void start() {
-		activeBlock = blockFactory.makeBar();
+		activeBlock = blockFactory.makeVerticalBar();
 		activeBlock.moveTo((getHorizonalSize()-activeBlock.getWidth())/2,0);
 	}
 
