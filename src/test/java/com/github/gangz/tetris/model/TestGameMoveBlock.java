@@ -21,7 +21,7 @@ public class TestGameMoveBlock {
 		game.start();
 		for (int i=0;i<2*game.getHorizonalSize();i++)
 			game.moveRight();
-		assertEquals(game.getHorizonalSize()-1,game.getActiveBlock().getX());
+		assertEquals(game.getHorizonalSize()-game.getActiveBlock().getWidth(),game.getActiveBlock().getX());
 	}
 	
 	@Test

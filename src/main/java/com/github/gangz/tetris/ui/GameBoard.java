@@ -99,6 +99,7 @@ public class GameBoard extends JFrame implements IGameDataChangedListener, KeyLi
 			break;
 		case KeyEvent.VK_DOWN:
 			game.moveActiveBlockDown();
+			break;
 		case KeyEvent.VK_ENTER:
 			game.pauseToogle();
 		}

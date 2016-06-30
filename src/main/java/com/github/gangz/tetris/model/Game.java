@@ -112,7 +112,7 @@ public class Game {
 	private void resume() {
 		paused=false;
 		timer = new Timer();
-		timer.schedule(new BlockDownTask(this), 0,1000);
+		timer.schedule(new BlockDownTask(this), 0,300);
 	}
 	private boolean isPaused() {
 		return paused;
